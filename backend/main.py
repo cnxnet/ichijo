@@ -10,7 +10,7 @@ load_dotenv()
 app = FastAPI()
 
 # Obtener las claves de API desde las variables de entorno
-DEEPSEEK_API_KEY = os.getenv("sk-800ec655dc774fe9bae1c8fe6b6ed50f")
+DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
 
 class DocumentRequest(BaseModel):
     prompt: str
@@ -25,7 +25,7 @@ def generate_document(request: DocumentRequest):
 
     response = requests.post(
         "https://api.deepseek.com/v1/chat/completions",
-        headers={"Authorization": f"Bearer {sk-800ec655dc774fe9bae1c8fe6b6ed50f}"},
+        headers={"Authorization": f"Bearer {DEEPSEEK_API_KEY}"},
         json={"model": "deepseek-chat", "messages": [{"role": "user", "content": request.prompt}]}
     )
 
